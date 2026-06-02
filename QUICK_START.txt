@@ -1,0 +1,13 @@
+GDPHYSX Phase 1 - Windows Release
+==================================
+
+RECOMMENDED: Use GitHub Actions (automatic build)
+1. Push this repo to GitHub
+2. Go to Actions tab
+3. Download Windows exe from artifacts
+
+OR: Build manually with vcpkg (30 minutes)
+See BUILD_INSTRUCTIONS.md for steps
+
+The .exe will be in: build/Release/GDPHYSX_Phase1.exe
+

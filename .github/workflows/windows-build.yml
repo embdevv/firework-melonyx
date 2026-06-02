@@ -1,0 +1,37 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install vcpkg
+      run: |
+        git clone https://github.com/Microsoft/vcpkg.git
+        cd vcpkg
+        .\bootstrap-vcpkg.bat
+        cd ..
+    
+    - name: Install dependencies
+      run: |
+        vcpkg\vcpkg install glfw3:x64-windows glew:x64-windows glm:x64-windows opengl:x64-windows
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
+    
+    - name: Build
+      run: cmake --build build --config Release
+    
+    - name: Upload executable
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-executable
+        path: build/Release/GDPHYSX_Phase1.exe
