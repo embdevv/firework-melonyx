@@ -8,28 +8,27 @@ on:
 jobs:
   build:
     runs-on: windows-2022
-    
+
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Install vcpkg
-      run: |
-        git clone https://github.com/Microsoft/vcpkg.git
-        cd vcpkg
-        .\bootstrap-vcpkg.bat
-        cd ..
-    
+
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgGitCommitId: 'a42af01b72c28a8e1d7b48107b8b95b176e77ac0'
+
     - name: Install dependencies
-      run: |
-        vcpkg\vcpkg install glfw3:x64-windows glew:x64-windows glm:x64-windows opengl:x64-windows
-    
+      run: vcpkg install glfw3:x64-windows glew:x64-windows glm:x64-windows opengl:x64-windows
+
     - name: Configure CMake
-      run: |
-        cmake -B build -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
-    
+      run: >
+        cmake -B build
+        "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+        -DCMAKE_BUILD_TYPE=Release
+
     - name: Build
       run: cmake --build build --config Release
-    
+
     - name: Copy shaders next to executable
       run: |
         copy shaders\particle.vert build\Release\particle.vert
