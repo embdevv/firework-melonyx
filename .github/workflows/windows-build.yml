@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-2022
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Install vcpkg
       run: |
@@ -30,8 +30,16 @@ jobs:
     - name: Build
       run: cmake --build build --config Release
     
+    - name: Copy shaders next to executable
+      run: |
+        copy shaders\particle.vert build\Release\particle.vert
+        copy shaders\particle.frag build\Release\particle.frag
+
     - name: Upload executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: windows-executable
-        path: build/Release/GDPHYSX_Phase1.exe
+        path: |
+          build/Release/GDPHYSX_Phase1.exe
+          build/Release/particle.vert
+          build/Release/particle.frag
