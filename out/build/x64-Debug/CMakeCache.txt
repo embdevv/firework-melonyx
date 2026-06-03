@@ -23,8 +23,8 @@ CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
-//CXX compiler
-CMAKE_CXX_COMPILER:STRING=C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
+//No help, variable specified on the command line.
+CMAKE_CXX_COMPILER:FILEPATH=C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
 
 //Flags used by the CXX compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=/DWIN32 /D_WINDOWS /GR /EHsc
@@ -44,8 +44,8 @@ CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=/Zi /O2 /Ob1 /DNDEBUG
 //Libraries linked by default with all C++ applications.
 CMAKE_CXX_STANDARD_LIBRARIES:STRING=kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
 
-//C compiler
-CMAKE_C_COMPILER:STRING=C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
+//No help, variable specified on the command line.
+CMAKE_C_COMPILER:FILEPATH=C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
 
 //Flags used by the C compiler during all build types.
 CMAKE_C_FLAGS:STRING=/DWIN32 /D_WINDOWS
@@ -620,7 +620,7 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding OpenGL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[opengl32][ ][v()]
 //Details about finding Python
-FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[C:/Users/erica/AppData/Local/Python/pythoncore-3.14-64/python.exe][found components: Interpreter ][v3.14.3()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[C:/Users/erica/AppData/Local/Python/pythoncore-3.14-64/python.exe][found components: Interpreter ][v3.14.5()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
@@ -646,7 +646,7 @@ _Python_EXECUTABLE:INTERNAL=C:/Users/erica/AppData/Local/Python/pythoncore-3.14-
 //Path to a program.
 _Python_EXECUTABLE_DEBUG:INTERNAL=_Python_EXECUTABLE_DEBUG-NOTFOUND
 //Python Properties
-_Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;14;3;64;32;<none>;cp314-win_amd64;;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages
+_Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;14;5;64;32;<none>;cp314-win_amd64;;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages;C:\Users\erica\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages
 _Python_INTERPRETER_SIGNATURE:INTERNAL=2ff6cf99e4f3340a67ca329683b5a2e4
 //NumPy reason failure
 _Python_NumPy_REASON_FAILURE:INTERNAL=

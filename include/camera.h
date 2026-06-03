@@ -12,11 +12,11 @@
  */
 class Camera {
 private:
-    float distance = 20.0f;             ///< Distance from orbital center
+    float distance = 400.0f;             ///< Distance from orbital center
     float angle = 0.0f;                 ///< Orbital angle around Y-axis (radians)
 
 public:
-    glm::vec3 position = glm::vec3(0.0f, 5.0f, 20.0f);  ///< Current camera position
+    glm::vec3 position = glm::vec3(0.0f, 0.0f, 400.0f);  ///< Current camera position
     bool isPerspective = true;          ///< True for perspective, false for orthographic
 
     /**
@@ -26,7 +26,7 @@ public:
      */
     void rotateAroundPoint(float dx, float dy) {
         angle += dx * 0.02f;
-        distance = glm::max(5.0f, distance - dy * 0.1f);
+        distance = glm::max(100.0f, distance - dy * 2.0f);
         updatePosition();
     }
 
@@ -36,7 +36,7 @@ public:
     void updatePosition() {
         position.x = distance * std::cos(angle);
         position.z = distance * std::sin(angle);
-        position.y = 5.0f;
+        position.y = 100.0f;
     }
 
     /**
@@ -53,7 +53,7 @@ public:
      */
     glm::mat4 getProjectionMatrix() {
         if (isPerspective)
-            return glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
-        return glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.1f, 100.0f);
+            return glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 2000.0f);
+        return glm::ortho(-400.0f, 400.0f, -400.0f, 400.0f, 1.0f, 2000.0f);
     }
 };

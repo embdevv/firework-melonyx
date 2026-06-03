@@ -1,0 +1,111 @@
+GDPHYSX Phase 1 - Implementation Documentation
+===============================================
+
+Engine: Melonyx - Particle Physics Engine
+
+Overview:
+The Melonyx engine is a C++ based particle physics system that simulates fountain fireworks 
+using OpenGL. The implementation demonstrates fundamental physics simulation techniques 
+including particle lifecycle management, velocity integration, and gravity simulation.
+
+Architecture:
+
+1. PARTICLE SYSTEM (particle.h)
+   - Particle Class: Represents individual particles with the following attributes:
+     * Position (3D vector)
+     * Velocity (3D vector)
+     * Acceleration (constant gravity at -10 m/s² on Y-axis)
+     * Lifespan (float in seconds, decremented each frame)
+     * Radius (2-10 meters for visual representation)
+     * Color (RGB randomized)
+   - Each particle is rendered as a scaled sphere based on its radius
+   - Particles are automatically removed when lifespan reaches 0
+
+2. PHYSICS ENGINE (engine.h/engine.cpp - "Melonyx" class)
+   - Update Loop:
+     * Called every frame with deltaTime (~0.0167s at 60 FPS)
+     * Updates velocity: velocity += acceleration * dt
+     * Updates position: position += velocity * dt
+     * Decrements lifespan: lifespan -= dt
+     * Removes particles when lifespan <= 0
+   
+   - Spawn System:
+     * Continuous spawning at regular intervals (every 50ms)
+     * Spawns user-defined count of particles per second
+     * Spawn position: Bottom-center of screen (0, -280, 0)
+     * Random initial velocities for spread effect
+     * Random colors (full RGB range)
+     * Lifespan randomly between 1-10 seconds
+     * Radius randomly between 2-10 meters
+   
+   - Mesh Generation (generateSphereMesh):
+     * UV sphere generation using sector/stack algorithm
+     * 32x32 resolution for smooth appearance
+     * Normalized to unit sphere, scaled by particle radius
+
+3. CAMERA SYSTEM (camera.h - Camera class)
+   - Orbital Camera:
+     * Maintains fixed distance from world center
+     * Orbits around Y-axis using angle parameter
+     * Position locked at Y=100 for consistent viewing angle
+     * Distance adjustable via W/S keys (zoom in/out)
+   
+   - Dual Projection:
+     * Orthographic: Fixed 800x800 pixel view, 1px:1m scale
+     * Perspective: 90° FOV, same visual scale
+     * Swapped via keys 1 and 2
+
+4. RENDERING (main.cpp)
+   - OpenGL Core Profile 3.3
+   - Shaders: particle.vert and particle.frag
+   - Per-frame rendering:
+     * Clears color/depth buffers
+     * For each particle: transform to position/radius, apply color
+     * Uses shared sphere mesh VAO for efficient rendering
+   - Input handling for camera rotation and view switching
+   - 60 FPS target with vsync
+
+5. PHYSICS CONSTANTS
+   - Gravity: -10.0 m/s² (Y-axis)
+   - Window: 800x800 pixels
+   - Scale: 1 pixel ≈ 1 meter
+   - Spawn rate: User-defined (divided into 20/second intervals)
+   - Particle colors: Full randomization (0.0-1.0 RGB)
+
+Key Implementation Details:
+
+- No position updates in main class: All physics and movement are handled by 
+  the engine's update() method
+  
+- Lifespan Management: Each particle has a lifespan value decremented every frame.
+  When it reaches 0, the particle is erased from the active particle list.
+  
+- Gravity Simulation: Constant acceleration of (0, -10, 0) is applied every frame,
+  creating natural parabolic trajectories
+  
+- Continuous Spawning: Uses a timer (spawnTimer) to maintain consistent spawn rates
+  even with variable frame times
+  
+- Efficient Rendering: Single sphere mesh is reused for all particles, with 
+  transformations applied per particle via model matrix
+  
+- Camera Controls: Allows viewing from multiple angles to verify particle behavior
+  and fountain spread in 3D space
+
+Performance Considerations:
+
+- Particle count: Can simulate 1000+ particles at 60 FPS
+- Memory: Particles stored in std::vector, automatically cleaned up when removed
+- GPU: Single VAO/VBO/EBO for sphere mesh, multiple draws per frame
+
+Testing & Validation:
+
+The demo validates:
+✓ Particle spawning at correct rate and position
+✓ Gravity effect on particle trajectories
+✓ Lifespan countdown and particle removal
+✓ Color randomization visibility
+✓ Camera orbital movement and zoom
+✓ Projection switching
+✓ Pause/resume functionality
+✓ Continuous simulation without crashes

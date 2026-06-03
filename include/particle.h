@@ -37,9 +37,15 @@ public:
      * @return Model matrix: translate to position, scale by radius
      */
     glm::mat4 getModelMatrix() const {
+        // Start with identity matrix
         glm::mat4 model = glm::mat4(1.0f);
+        
+        // Translate to the particle's current world position
         model = glm::translate(model, position);
+        
+        // Scale the unit sphere to the particle's radius (2-10 meters)
         model = glm::scale(model, glm::vec3(radius));
+        
         return model;
     }
 };
