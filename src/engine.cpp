@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <glad/gl.h>
 #include "../include/engine.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
