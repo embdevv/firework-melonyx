@@ -155,11 +155,9 @@ int main() {
     glfwMakeContextCurrent(win);
     glfwSwapInterval(1);
 
-    // Initialize GLEW
-    glewExperimental = GL_TRUE;
-    GLenum err = glewInit();
-    if (err != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW: " << glewGetErrorString(err) << "\n";
+    // Initialize Glad
+    if (!gladLoadGL(glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize Glad\n";
         glfwDestroyWindow(win);
         glfwTerminate();
         return -1;
