@@ -145,7 +145,7 @@
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        GLFWwindow* win = glfwCreateWindow(800, 800, "GDPHYSX – Particle Demo", nullptr, nullptr);
+        GLFWwindow* win = glfwCreateWindow(800, 800, "melonYX", nullptr, nullptr);
         if (!win) {
             std::cerr << "Failed to create window\n";
             glfwTerminate();
